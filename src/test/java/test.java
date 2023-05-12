@@ -1,13 +1,10 @@
-import Dao.Database;
+import Dao.UserDaoImpl;
 import org.junit.jupiter.api.Test;
-import Data.Userdata;
-
-import java.util.ArrayList;
 
 public class test {
     @Test
      public void maintest() throws Exception{
-        Database da=new Database();
+        UserDaoImpl da=new UserDaoImpl();
         //da.Register("21221212","21","nan");
         //ArrayList<Userdata> usedata=da.getUser("22");
         //for(Userdata  each:usedata)

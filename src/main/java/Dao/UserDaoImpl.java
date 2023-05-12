@@ -8,14 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class Database {
+public class UserDaoImpl implements UserDao{
 
     Connection conn=null;
-    public Database() throws Exception {
+    public UserDaoImpl() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.conn= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/first?serverTimezone=GMT%2B8","root","admin");
     }
-    //测试链接
+
     public void  testconnection()
     {
         if(conn==null)
@@ -32,7 +32,7 @@ public class Database {
     }
 
 
-    //执行插入数据库(注册)
+    @Override
     public boolean Register(String userid,String enterpassword,String gender) throws Exception
     {
         PreparedStatement prep1=conn.prepareStatement("select * from person where userid=?");
@@ -51,7 +51,8 @@ public class Database {
         prep2.execute();
         return  true;
     }
-    //登录
+
+    @Override
     public boolean Loginin(String userid,String enterpassword)throws Exception
     {
         PreparedStatement prep=conn.prepareStatement("select * from person where userid=?");
@@ -70,7 +71,8 @@ public class Database {
         }
         return false;
     }
-    //在表里查询数据(里面含有userid的会被全部查询到而且进入动态数组)
+
+    @Override
     public ArrayList<Userdata> getUser(String userid)throws Exception
     {
         ArrayList<Userdata> userlist=new ArrayList<Userdata>();
@@ -88,7 +90,8 @@ public class Database {
         }
         return userlist;
     }
-    //获取所有的用户信息
+
+    @Override
     public ArrayList<Userdata> getAllUser()throws Exception{
         ArrayList<Userdata> userlist=new ArrayList<Userdata>();
         PreparedStatement prep=conn.prepareStatement("select * from person;");

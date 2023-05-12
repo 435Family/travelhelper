@@ -1,6 +1,6 @@
 package Servlet;
 
-import Dao.Database;
+import Dao.UserDaoImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,14 +27,14 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         try {
-            Database database=new Database();
-            if(database.Register(userid,enterpassword,gender))
+            UserDaoImpl userDaoImpl =new UserDaoImpl();
+            if(userDaoImpl.Register(userid,enterpassword,gender))
             {
                 //注册成功
             }else {
                 //该用户已经存在
             }
-            database.closeconnection();
+            userDaoImpl.closeconnection();
         } catch (Exception e) {
              e.printStackTrace();
              //程序出错

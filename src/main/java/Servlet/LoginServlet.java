@@ -1,7 +1,6 @@
 package Servlet;
 
-import Dao.Database;
-import jakarta.servlet.Servlet;
+import Dao.UserDaoImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,8 +21,8 @@ public class LoginServlet  extends HttpServlet {
         String enterpassword=request.getParameter("password").toString();//获取密码
 
         try {
-            Database database=new Database();
-            if(database.Loginin(userid,enterpassword))
+            UserDaoImpl userDaoImpl =new UserDaoImpl();
+            if(userDaoImpl.Loginin(userid,enterpassword))
             {
                 //成功登录
             }else {
