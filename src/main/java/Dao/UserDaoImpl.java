@@ -72,39 +72,5 @@ public class UserDaoImpl implements UserDao{
         return false;
     }
 
-    @Override
-    public ArrayList<Userdata> getUser(String userid)throws Exception
-    {
-        ArrayList<Userdata> userlist=new ArrayList<Userdata>();
-        PreparedStatement prep=conn.prepareStatement("select *from person where userid like ?;");
-        prep.setString(1,"%"+userid+"%");
-        prep.execute();
-        ResultSet resultSet= prep.executeQuery();
-        while(resultSet.next())
-        {
-            int num=resultSet.getInt("num");
-            String id= resultSet.getString("userid");
-            String enterpassword= resultSet.getString("enterpassword");
-            String gender = resultSet.getString("gender");
-            userlist.add(new Userdata(num,id,enterpassword,gender));
-        }
-        return userlist;
-    }
 
-    @Override
-    public ArrayList<Userdata> getAllUser()throws Exception{
-        ArrayList<Userdata> userlist=new ArrayList<Userdata>();
-        PreparedStatement prep=conn.prepareStatement("select * from person;");
-        prep.execute();
-        ResultSet resultSet= prep.executeQuery();
-        while(resultSet.next())
-        {
-            int num=resultSet.getInt("num");
-            String id= resultSet.getString("userid");
-            String enterpassword= resultSet.getString("enterpassword");
-            String gender = resultSet.getString("gender");
-            userlist.add(new Userdata(num,id,enterpassword,gender));
-        }
-        return  userlist;
-    }
 }

@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 @WebServlet(name="RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     @Override
@@ -26,13 +28,18 @@ public class RegisterServlet extends HttpServlet {
             //两次密码不一致
             return;
         }
+        PrintWriter out;
         try {
             UserDaoImpl userDaoImpl =new UserDaoImpl();
+            out=response.getWriter();
             if(userDaoImpl.Register(userid,enterpassword,gender))
             {
+
                 //注册成功
+                out.close();
             }else {
                 //该用户已经存在
+                out.close();
             }
             userDaoImpl.closeconnection();
         } catch (Exception e) {
