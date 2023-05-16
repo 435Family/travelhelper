@@ -1,9 +1,6 @@
-import Dao.MangerDaoImpl;
 import Data.Userdata;
 import org.junit.jupiter.api.Test;
 import service.UserServiceImpl;
-
-import java.util.ArrayList;
 
 public class test {
     @Test

@@ -15,20 +15,7 @@ public class UserDaoImpl implements UserDao {
         this.conn= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/first?serverTimezone=GMT%2B8","root","admin");
     }
 
-    public void  testconnection()
-    {
-        if(conn==null)
-        {
-            System.out.println("数据库连接失败");
-        }else {
-            System.out.println("数据库连接成功");
-        }
-    }
-    //关闭连接
-    public void  closeconnection () throws Exception
-    {
-        conn.close();
-    }
+
 
     @Override
     public boolean findByUserid(String userid) throws Exception {

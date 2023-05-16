@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class MangerDaoImpl implements MangerDao{
+public class ManagerDaoImpl implements ManagerDao {
     Connection conn;
-    public MangerDaoImpl() throws Exception {
+    public ManagerDaoImpl() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.conn= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/first?serverTimezone=GMT%2B8","root","admin");
     }
@@ -18,11 +18,14 @@ public class MangerDaoImpl implements MangerDao{
     @Override
     public ArrayList<Userdata> getUser(String userid)throws Exception
     {
+        //1.建立ArrayList动态数组
         ArrayList<Userdata> userlist=new ArrayList<Userdata>();
+        //2.建立数据库连接获取数据
         PreparedStatement prep=conn.prepareStatement("select *from person where userid like ?;");
         prep.setString(1,"%"+userid+"%");
         prep.execute();
         ResultSet resultSet= prep.executeQuery();
+
         while(resultSet.next())
         {
             int num=resultSet.getInt("num");
@@ -40,6 +43,7 @@ public class MangerDaoImpl implements MangerDao{
         PreparedStatement prep=conn.prepareStatement("select * from person;");
         prep.execute();
         ResultSet resultSet= prep.executeQuery();
+
         while(resultSet.next())
         {
             int num=resultSet.getInt("num");
