@@ -6,6 +6,10 @@ public class Userdata {
     private String enterpassword;
     private String gender;
 
+    public Userdata()
+    {
+
+    }
     public Userdata(int num, String userid, String enterpassword, String gender) {
         this.num = num;
         this.userid = userid;

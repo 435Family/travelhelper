@@ -6,9 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
     Connection conn=null;
     public UserDaoImpl() throws Exception {
@@ -31,38 +30,38 @@ public class UserDaoImpl implements UserDao{
         conn.close();
     }
 
-
     @Override
-    public boolean Register(String userid,String enterpassword,String gender) throws Exception
-    {
-        PreparedStatement prep1=conn.prepareStatement("select * from person where userid=?");
-        prep1.setString(1,userid);
-        prep1.execute();
-        ResultSet resultSet= prep1.executeQuery();
-        if(resultSet.next())
+    public boolean findByUserid(String userid) throws Exception {
+        PreparedStatement prep=conn.prepareStatement("select * from person where userid=?");
+        prep.setString(1, userid);
+        prep.execute();
+        ResultSet resultSet= prep.executeQuery();
+        if(resultSet.next())//已经存在该用户
         {
-           return false;
+            return true;
         }
-
-        PreparedStatement prep2=conn.prepareStatement("insert into person(userid,enterpassword,gender) values (?,?,?);");
-        prep2.setString(1,userid);
-        prep2.setString(2,enterpassword);
-        prep2.setString(3,gender);
-        prep2.execute();
-        return  true;
+        return false;
     }
 
     @Override
-    public boolean Loginin(String userid,String enterpassword)throws Exception
-    {
+    public void save(Userdata user) throws Exception {
+        PreparedStatement prep=conn.prepareStatement("insert into person(userid,enterpassword,gender) values (?,?,?);");
+        prep.setString(1,user.getUserid());
+        prep.setString(2,user.getEnterpassword());
+        prep.setString(3,user.getGender());
+        prep.execute();
+        return;
+    }
+
+    @Override
+    public boolean checkoutpassword(String userid,String enterpassword) throws Exception {
         PreparedStatement prep=conn.prepareStatement("select * from person where userid=?");
-        prep.setString(1,userid);
+        prep.setString(1, userid);
         prep.execute();
         ResultSet resultSet= prep.executeQuery();
-        if(resultSet.next())
+        if(resultSet.next())//存在该用户
         {
-            String realpassword= resultSet.getString("enterpassword");
-            if(enterpassword.equals(realpassword))
+            if(enterpassword.equals(resultSet.getString("enterpassword")))
             {
                 return true;
             }else {

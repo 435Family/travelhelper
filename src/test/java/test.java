@@ -1,7 +1,7 @@
-import Dao.MangerDaoimpl;
-import Dao.UserDaoImpl;
+import Dao.MangerDaoImpl;
 import Data.Userdata;
 import org.junit.jupiter.api.Test;
+import service.UserServiceImpl;
 
 import java.util.ArrayList;
 
@@ -15,18 +15,12 @@ public class test {
         //{
            // System.out.println(each.getUserid());
         //}
-        try {
-            MangerDaoimpl mangerDaoimpl=new MangerDaoimpl();
-            ArrayList<Userdata> userlist=mangerDaoimpl.getAllUser();
-            for(Userdata user :userlist)
-            {
-                int num=user.getNum();//获得
-                String gender=user.getGender();
-                String userid=user.getUserid();
-                System.out.println(num+" "+gender+" "+userid);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Userdata user=new Userdata(1,"21212","21","nan");
+        UserServiceImpl userService=new UserServiceImpl();
+        if(userService.Register(user)){
+            System.out.println("注册成功");
+        }else {
+            System.out.println("登陆失败");
         }
 
 

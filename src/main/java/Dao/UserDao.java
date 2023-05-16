@@ -2,10 +2,8 @@ package Dao;
 
 import Data.Userdata;
 
-import java.util.ArrayList;
-
 public interface UserDao {
-    public boolean Register(String userid,String enterpassword,String gender)throws Exception;//注册，返回boolen值
-    public boolean Loginin(String userid,String enterpassword)throws Exception; //登录,返回boolen值
-
+    public boolean findByUserid(String userid)throws Exception;//(注册/登录)寻找id
+    public void save(Userdata user)throws Exception; //(注册)保存用户
+    public boolean checkoutpassword(String userid,String enterpassword)throws Exception;//(登录)检验密码
 }

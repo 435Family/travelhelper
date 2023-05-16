@@ -7,28 +7,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class MangerDaoimpl implements MangerDao{
+public class MangerDaoImpl implements MangerDao{
     Connection conn;
-    public MangerDaoimpl() throws Exception {
+    public MangerDaoImpl() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.conn= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/first?serverTimezone=GMT%2B8","root","admin");
     }
-    public void  testconnection()
-    {
-        if(conn==null)
-        {
-            System.out.println("数据库连接失败");
-        }else {
-            System.out.println("数据库连接成功");
-        }
-    }
-    //关闭连接
-    public void  closeconnection () throws Exception
-    {
-        conn.close();
-    }
+
     @Override
     public ArrayList<Userdata> getUser(String userid)throws Exception
     {

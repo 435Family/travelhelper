@@ -1,6 +1,6 @@
 package Servlet;
 
-import Dao.MangerDaoimpl;
+import Dao.MangerDaoImpl;
 import Data.Userdata;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +30,7 @@ public class GetallUserServlet extends HttpServlet{
 
         try {
             out=response.getWriter();
-            MangerDaoimpl mangerDaoimpl=new MangerDaoimpl();
+            MangerDaoImpl mangerDaoimpl=new MangerDaoImpl();
             ArrayList<Userdata> userlist=mangerDaoimpl.getAllUser();
             for(Userdata user :userlist)
             {
