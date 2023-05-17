@@ -59,4 +59,9 @@ public class UserDaoImpl implements UserDao {
     }
 
 
+<<<<<<< HEAD
+=======
+    public boolean Register(String userid, String enterpassword, String gender) {
+    }
+>>>>>>> main
 }

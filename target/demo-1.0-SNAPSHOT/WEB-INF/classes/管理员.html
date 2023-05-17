@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!--添加新数据后的问题，删除问题-->
+<style>
+    *{
+        text-align: center;
+    }
+    table{
+        border: black solid 1px;
+        margin: auto;
+        width: 600px;
+    }
+    td,th{
+        text-align: center;
+        border: black solid 1px;
+        height: 50px;
+    }
+
+    div{
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-left: 95px;
+    }
+    #name,#pwd{
+        height: 31px;
+        margin: 10px;
+    }
+    #add{
+        height: 30px;
+        width: 80px;
+        margin: 20px;
+    }
+    #gender{
+        height: 37px;
+        width: 160px;
+        color: gray;
+    }
+    #delBtn{
+        text-align: center;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>管理</title>
+</head>
+<body>
+    <h1>用户管理</h1>
+    <div>
+        <input type="text" id="name" placeholder="请输入用户名">
+        <input type="text" id="pwd" placeholder="请输入密码">
+        <select  id="gender" name="g">
+            <option >请选择性别</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <input type="button" value="添加用户" id="add" class="btn btn-primary">
+    </div>
+
+    <table class="table-hover">
+        <tr>
+            <td><input type="checkbox" id="firstBox"onclick="Sel()"></td><th style="text-align: center">用户名</th><th style="text-align: center">密码</th><th style="text-align: center">性别</th><th style="text-align: center">管理</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="ck"></td><td>wzc</td><td>123456</td><td>男</td><td><a href="javascript:void(0)" onclick="delTr(this)">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"class="ck"></td><td>张三</td><td>zxbnas12</td><td>女</td><td><a href="javascript:void(0)" onclick="delTr(this)">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"class="ck"></td><td>李四qwq</td><td>1231sa</td><td>男</td><td><a href="javascript:void(0)" onclick="delTr(this)">删除</a></td>
+        </tr>
+    </table>
+<div id="delBtn">
+    <input type="button" onclick="Del()" value="删除" class="btn btn-primary">
+</div>
+</body>
+<script>
+    function Sel()
+    {
+        var x=document.getElementById("firstBox");
+        if(x.checked)
+        {
+            var arr=document.getElementsByClassName("ck")
+            for(var i=0;i<arr.length;i++)
+            {
+                arr[i].checked=true;
+            }
+        }
+        else{
+            var arr=document.getElementsByClassName("ck")
+            for(var i=0;i<arr.length;i++)
+            {
+                arr[i].checked=false;
+            }
+        }
+    }
+    function Del()
+    {
+        var arr=document.getElementsByClassName("ck");
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].checked==true)
+            {
+                delTr(arr[i]);
+            }
+        }
+    }
+
+    var btn=document.getElementById("add");
+    btn.onclick=function (){
+        var name=document.getElementById("name").value;
+        var pwd=document.getElementById("pwd").value;
+        var gender=document.getElementById("gender").value;
+
+        var table=document.getElementsByTagName("table")[0];
+        var tr=document.createElement("tr");
+
+       var td_=document.createElement("td");
+        var checkBox=document.createElement("input");
+        checkBox.setAttribute("type","checkbox");
+        td_.appendChild(checkBox);
+        tr.appendChild(td_);
+
+        var td_name=document.createElement("td");
+        var t1=document.createTextNode(name)
+        td_name.appendChild(t1);
+        tr.appendChild(td_name);
+
+        var td_pwd=document.createElement("td");
+        var t2=document.createTextNode(pwd)
+        td_pwd.appendChild(t2);
+        tr.appendChild(td_pwd);
+
+        var td_gender=document.createElement("td");
+        var t3=document.createTextNode(gender)
+        td_gender.appendChild(t3);
+        tr.appendChild(td_gender);
+
+        var x=document.createElement("td");
+        var a=document.createElement("a");
+        a.setAttribute("href","javascript:void(0)");
+        a.setAttribute("onclick","delTr(this)");
+        var t_a=document.createTextNode("删除");
+        a.appendChild(t_a);
+        x.appendChild(a);
+        tr.appendChild(x);
+
+        table.appendChild(tr);
+    }
+  function delTr(obj){
+    var table=obj.parentNode.parentNode.parentNode;
+    var tr=obj.parentNode.parentNode;
+    table.removeChild(tr)
+  }
+</script>
+</html>
