@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+  <head>
+    <title>tomcat</title>
+  </head>
+  <body>
+    hello,tomcat!
+=======
 <%--
   Created by IntelliJ IDEA.
   User: 王子辰
@@ -12,5 +22,6 @@
   </head>
   <body>
 hello tomcat
+>>>>>>> main
   </body>
 </html>

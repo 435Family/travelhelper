@@ -29,7 +29,6 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
-
     @Override
     public void save(Userdata user) throws Exception {
         PreparedStatement prep=conn.prepareStatement("insert into person(userid,enterpassword,gender) values (?,?,?);");
@@ -39,7 +38,6 @@ public class UserDaoImpl implements UserDao {
         prep.execute();
         return;
     }
-
     @Override
     public boolean checkoutpassword(String userid,String enterpassword) throws Exception {
         PreparedStatement prep=conn.prepareStatement("select * from person where userid=?");
@@ -57,11 +55,4 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
-
-
-<<<<<<< HEAD
-=======
-    public boolean Register(String userid, String enterpassword, String gender) {
-    }
->>>>>>> main
 }

@@ -1,4 +1,4 @@
-package Servlet;
+package servlet;
 
 import Data.ResultInfo;
 import Data.Userdata;
@@ -13,8 +13,16 @@ import java.io.IOException;
 
 @WebServlet("/user/*")
 public class UserServlet extends BaseServlet{
-
-    protected void Regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    UserServiceImpl service;
+    {
+        try {
+            service = new UserServiceImpl();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    ResultInfo info=new ResultInfo();
+    public void Regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
 
         //1.获取数据
@@ -30,16 +38,13 @@ public class UserServlet extends BaseServlet{
         user.setUserid(userid);
         user.setGender(gender);
 
-        //3.调用service注册
+        //3.返回
         try {
-            UserServiceImpl service=new UserServiceImpl();
             boolean flag=service.Register(user);
-            ResultInfo info=new ResultInfo();
             if(flag)
             {
                 //注册成功
                 info.setFlag(true);
-
             }else {
                 //该用户已经存在
                 info.setFlag(false);
@@ -49,8 +54,16 @@ public class UserServlet extends BaseServlet{
             e.printStackTrace();
             //程序出错
         }
+        //4.将info对象序列化为json
+        ObjectMapper mapper=new ObjectMapper();
+        String json=mapper.writeValueAsString(info);
+
+        //5.将json数据写回客户端
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(json);
+        return;
     }
-    protected void Loginin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void Loginin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //1.获取数据
         request.setCharacterEncoding("utf-8");//设置返回请求的字体类型
         request.setCharacterEncoding("text/html;charset=utf-8");
@@ -64,20 +77,25 @@ public class UserServlet extends BaseServlet{
 
         //3.调用service完成登录
         try {
-            UserServiceImpl service=new UserServiceImpl();
-            boolean flag=service.Loginin(user);
-            ResultInfo info=new ResultInfo();
-            if(flag)
-            {   //成功登录
-                info.setFlag(true);
-            }else {
-                info.setFlag(false);
-                info.setErrorMsh("登录失败，检查密码是否正确或者账户是否存在");
-            }
+            info=service.Loginin(user);
         } catch (Exception e) {
             e.printStackTrace();
             //程序出错
         }
+        //4.将info对象序列化为json
+        ObjectMapper mapper=new ObjectMapper();
+        String json=mapper.writeValueAsString(info);
+
+        //5.将json数据写回客户端
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(json);
+        return;
+    }
+    public void exit(HttpServletRequest request, HttpServletResponse response)throws Exception{//退出
+        //1.销毁session
+        request.getSession().invalidate();
+        //2.重定向界面
+        response.sendRedirect(request.getContextPath());
     }
 }
 

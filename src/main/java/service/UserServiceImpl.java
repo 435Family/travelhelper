@@ -2,6 +2,7 @@ package service;
 
 import Dao.UserDao;
 import Dao.UserDaoImpl;
+import Data.ResultInfo;
 import Data.Userdata;
 
 import java.sql.Connection;
@@ -30,20 +31,26 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean Loginin(Userdata user)throws Exception
+    public ResultInfo Loginin(Userdata user)throws Exception
     {
+        ResultInfo info=new ResultInfo();
         if(userDao.findByUserid(user.getUserid()))
         {
             if(userDao.checkoutpassword(user.getUserid(),user.getEnterpassword()))
             {
-                return true;
+                info.setFlag(true);
+                return info;
             }else {
                 //密码错误
-                return false;
+                info.setFlag(false);
+                info.setErrorMsh("密码错误");
+                return info;
             }
         }else {
             //未注册
-            return false;
+            info.setFlag(false);
+            info.setErrorMsh("用户不存在");
+            return info;
         }
     }
 }

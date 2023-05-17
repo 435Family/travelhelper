@@ -2,10 +2,10 @@
   <artifact type="exploded-ear" name="helper:ear exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/helper_ear_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="helper/javaeeApplication/javaEEApplication" />
       <element id="directory" name="web.war">
         <element id="artifact" artifact-name="helper:war exploded" />
       </element>
+      <element id="javaee-facet-resources" facet="helper/javaeeApplication/javaEEApplication" />
     </root>
   </artifact>
 </component>

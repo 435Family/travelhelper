@@ -17,7 +17,12 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDao.getAllUser();
     }
     @Override
-    public ArrayList<Userdata> getUser(String userid) throws Exception {
+    public Userdata getUser(String userid) throws Exception {
         return managerDao.getUser(userid);
+    }
+
+    @Override
+    public void deleteUser(String userid) throws Exception {
+        managerDao.deleteUser(userid);
     }
 }

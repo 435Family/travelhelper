@@ -9,12 +9,5 @@
         <module name="demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-<<<<<<< HEAD
-      <module name="demo" target="11" />
-=======
-      <module name="demo" target="1.8" />
->>>>>>> main
-    </bytecodeTargetLevel>
   </component>
 </project>
