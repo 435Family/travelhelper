@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+  <style>
+    *{
+      margin:0px;
+      padding: 0px;
+      box-sizing: border-box;
+      font-size: 30px;
+    }
+    body{
+      background: url("../src/photo/7.jpg")no-repeat;background-size:100%;
+    }
+    .layout{
+      width: 750px;
+      height: 600px;
+      border: gray 7px solid;
+      background-color: wheat;
+      margin: auto;
+      margin-top: 150px;
+      padding: 15px;
+    }
+    div{
+
+    }
+    #reg1{
+      color: deepskyblue;
+      text-align: center;
+      font-size: 45px;
+    }
+    #reg2{
+      color: gray;
+      text-align: center;
+    }
+    .td_l{
+      text-align: right;
+      height: 80px;
+    }
+    .td_r{
+      padding-left: 30px;
+    }
+    .right{
+
+    }
+    .right p{
+      font-size: 20px;
+      text-align: center;
+    }
+    .right a{
+      font-size: 20px;
+      text-align: center;
+    }
+    #gender{
+      padding-left: 50px;
+      text-align: left;
+    }
+    #username{
+      width: 300px;
+      height: 50px;
+      border-radius: 5px;
+      padding-left: 10px;
+    }
+    .ipt{
+      font-size: 20px;
+      width: 300px;
+      height: 50px;
+      border: 2px solid #A6A6A6;
+      border-radius: 5px;
+      padding-left: 10px;
+    }
+    #tab{
+      width: 100%;
+      /*border: deepskyblue solid 2px;*/
+      height: 400px;
+    }
+    #btn{
+      width: 150px;
+      height: 55px;
+      background-color: chartreuse;
+      border: 1px solid chartreuse;
+      text-align: center;
+    }
+    #name{
+
+    }
+    .error{
+      color: red;
+      font-size: small;
+    }
+  </style>
+</head>
+<title>新用户注册</title>
+<body>
+  <div class="layout">
+    <div class="left">
+      <p id="reg1">新用户注册</p>
+      <p id="reg2">USER REGISTER</p>
+    </div>
+    <div class="center">
+      <div class="form" id="form">
+      <form action="#" method="post">
+        <table id="tab">
+          <tr id="name">
+            <td class="td_l"> <label for="username">用户名:</label> </td>
+            <td class="td_r"><input class="ipt" type="text" name="username" id="username" placeholder="请输入用户名" >
+            <span id="nameCorrect" class="error"></span></td>
+          </tr>
+          <tr>
+            <td class="td_l"><label for="pwd" >密码:</label> </td>
+            <td class="td_r"><input class="ipt" type="password" name="password" id="pwd" placeholder="请输入密码" >
+              <span id="pwdCorrect" class="error"></span></td>
+          </tr>
+          <tr>
+            <td class="td_l"><label for="pwd2">确认密码:</label> </td>
+            <td class="td_r"><input class="ipt" type="password" name="password" id="pwd2" placeholder="再次确认密码" >
+              <span id="pwdCorrect2" class="error"></span></td>
+          </tr>
+          <tr>
+            <td class="td_l"><label>性别:</label> </td>
+            <td id="gender">男<input type="radio" name="gender" value="male">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女<input type="radio" name="gender" value="female">
+              </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <input type="submit" id="btn" value="注册">
+            </td>
+          </tr>
+        </table>
+      </form>
+      </div>
+    </div>
+    <div class="right">
+      <p>已有帐号？<a href="登录.html">立即登录</a></p>
+    </div>
+  </div>
+<script>
+  var btn=document.getElementById("btn");
+  btn.onclick=function (){
+    if(checkUsername()&&checkPwd()&&checkPwd2())
+    {
+      alert("注册成功！");
+    }
+  }
+ window.onload=function (){
+   document.getElementById("form").onsubmit=function (){
+     return checkUsername()&&checkPwd()&&checkPwd2();
+   }
+
+  //用户名，密码，离开焦点显示对错
+  }
+ document.getElementById("username").onblur=checkUsername;
+ document.getElementById("pwd").onblur=checkPwd;
+ document.getElementById("pwd2").onblur=checkPwd2;
+
+
+  function checkUsername(){
+    var uname=document.getElementById("username").value;
+    var r1=/[\u4e00-\u9fa5_a-zA-Z0-9_]{3,9}/;
+    var flag=r1.test(uname);
+    var x=document.getElementById("nameCorrect")
+    if(flag){
+      x.innerHTML="<img src='../src/photo/correct.png' width='35px' height='30px'/>";
+    }
+    else{
+      x.innerHTML="用户名至少三个字"
+    }
+    return flag;
+  }
+  function checkPwd(){
+    var upwd=document.getElementById("pwd").value;
+    var r1=/\w{6,12}/;
+    var flag=r1.test(upwd);
+    var x=document.getElementById("pwdCorrect")
+    if(flag){
+      x.innerHTML="<img src='../src/photo/correct.png' width='35px' height='30px'/>";
+    }
+    else{
+      x.innerHTML="密码在6-12位之间"
+    }
+    return flag;
+  }
+  function checkPwd2(){
+    var upwd=document.getElementById("pwd").value;
+    var upwd2=document.getElementById("pwd2").value;
+    var flag=(upwd==upwd2);
+    var x=document.getElementById("pwdCorrect2")
+    if(flag){
+      x.innerHTML="<img src='../src/photo/correct.png' width='35px' height='30px'/>";
+    }
+    else{
+      x.innerHTML="密码错误"
+    }
+    return flag;
+  }
+
+
+</script>
+</body>
+</html>
