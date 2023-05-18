@@ -22,6 +22,11 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    public ArrayList<Userdata> getLikelyUser(String userid) throws Exception {
+        return managerDao.getLikelyUser(userid);
+    }
+
+    @Override
     public void deleteUser(String userid) throws Exception {
         managerDao.deleteUser(userid);
     }

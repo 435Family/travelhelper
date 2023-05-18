@@ -60,8 +60,8 @@ public class UserServlet extends BaseServlet{
 
         //5.将json数据写回客户端
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(json);
-        return;
+        response.getWriter().write(json);//字符流
+
     }
     public void Loginin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //1.获取数据
@@ -77,11 +77,12 @@ public class UserServlet extends BaseServlet{
 
         //3.调用service完成登录
         try {
-            info=service.Loginin(user);
+            info=service.Loginin(user);//注册成功与否与错误消息已经写在了info之中
         } catch (Exception e) {
             e.printStackTrace();
             //程序出错
         }
+
         //4.将info对象序列化为json
         ObjectMapper mapper=new ObjectMapper();
         String json=mapper.writeValueAsString(info);
@@ -89,13 +90,6 @@ public class UserServlet extends BaseServlet{
         //5.将json数据写回客户端
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(json);
-        return;
-    }
-    public void exit(HttpServletRequest request, HttpServletResponse response)throws Exception{//退出
-        //1.销毁session
-        request.getSession().invalidate();
-        //2.重定向界面
-        response.sendRedirect(request.getContextPath());
     }
 }
 

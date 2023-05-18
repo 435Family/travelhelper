@@ -14,20 +14,17 @@ public class UserDaoImpl implements UserDao {
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.conn= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/first?serverTimezone=GMT%2B8","root","admin");
     }
-
-
-
+    ManagerDaoImpl managerDao=new ManagerDaoImpl();
     @Override
     public boolean findByUserid(String userid) throws Exception {
-        PreparedStatement prep=conn.prepareStatement("select * from person where userid=?");
-        prep.setString(1, userid);
-        prep.execute();
-        ResultSet resultSet= prep.executeQuery();
-        if(resultSet.next())//已经存在该用户
+        Userdata userdata=new Userdata();
+        userdata=managerDao.getUser(userid);
+        if(userdata!=null)
         {
-            return true;
+            return  true;
+        }else {
+            return false;
         }
-        return false;
     }
     @Override
     public void save(Userdata user) throws Exception {
