@@ -7,10 +7,7 @@ import Dao.UserDaoImpl;
 import Data.ResultInfo;
 import Data.Userdata;
 import org.junit.jupiter.api.Test;
-import service.ManagerService;
-import service.ManagerServiceImpl;
-import service.UserService;
-import service.UserServiceImpl;
+import service.*;
 
 import java.util.ArrayList;
 
@@ -19,18 +16,13 @@ public class test {
 
     @Test
     public void test()throws Exception{
-        Userdata userdata=new Userdata();
-        userdata.setUserid("212121");
-        userdata.setEnterpassword("212121232");
-        ArrayList<Userdata>list=new ArrayList<>();
-        UserService userService=new UserServiceImpl();
-        ManagerService managerService=new ManagerServiceImpl();
+        CategoryService service=new CategoryServiceImpl();
         ResultInfo info=new ResultInfo();
-
-        list=managerService.getLikelyUser("2122");
-        for(Userdata user:list)
+        String[]list1={"旅游码头","国家与森林公园","丁汝昌寓所","甲午海战纪念馆"};
+        ArrayList<String> list=service.getShortestRoad(list1);
+        for (String each:list)
         {
-            System.out.println(user.getUserid()+"\n");
+            System.out.println(each);
         }
 
 

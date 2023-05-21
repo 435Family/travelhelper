@@ -10,8 +10,17 @@ public class ResultInfo {
     private Userdata user;//后端返回结果的数据对象
     private String errorMsh;//发生异常的错误消息
     private ArrayList<Userdata>userlist;//后端返回结果的数组
+    private ArrayList<String>categorylist;
     public ResultInfo() {
     }
+    public ArrayList<String> getCategorylist() {
+        return categorylist;
+    }
+
+    public void setCategorylist(ArrayList<String> categorylist) {
+        this.categorylist = categorylist;
+    }
+
     public ArrayList<Userdata> getUserlist() {
         return userlist;
     }
@@ -20,22 +29,6 @@ public class ResultInfo {
         this.userlist = userlist;
     }
 
-
-
-    public ResultInfo(boolean flag) {
-        this.flag = flag;
-    }
-
-    public ResultInfo(boolean flag, String errorMsh) {
-        this.flag = flag;
-        this.errorMsh = errorMsh;
-    }
-
-    public ResultInfo(boolean flag, Userdata user, String errorMsh) {
-        this.flag = flag;
-        this.user = user;
-        this.errorMsh = errorMsh;
-    }
 
     public boolean isFlag() {
         return flag;
